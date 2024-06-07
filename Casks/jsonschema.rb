@@ -1,6 +1,6 @@
 cask "jsonschema" do
-  version "0.2.0"
-  sha256 "661d44016b783c0908df79c5c0760c550360c9cfebea92acc585b9a2950be4ee"
+  version "0.3.0"
+  sha256 "19f4249b92716c6e75431b442f175ef0f1aabd18614aaf6ffa5cfca5d997fa26"
   url "https://github.com/Intelligence-AI/jsonschema/releases/download/v#{version}/jsonschema-#{version}-darwin-arm64.zip"
   name "JSON Schema CLI"
   desc "The CLI for working with JSON Schema"
