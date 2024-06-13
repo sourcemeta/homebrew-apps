@@ -9,7 +9,7 @@ cask "jsonschema" do
   name "JSON Schema CLI"
   desc "The CLI for working with JSON Schema"
   homepage "https://github.com/Intelligence-AI/jsonschema"
-  binary "jsonschema-#{version}-darwin-arm64/bin/jsonschema"
+  binary "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
   postflight do
     system_command "xattr", args: ["-c", "#{staged_path}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"]
     # As a test
