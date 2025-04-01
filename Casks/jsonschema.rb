@@ -1,9 +1,9 @@
 cask "jsonschema" do
-  version "7.1.4"
+  version "7.2.0"
 
   arch arm: "arm64", intel: "x86_64"
-  sha256 arm:   "e1c842d141868c684e6f4fa9647add719885c31161061b81e1b42dc881d588c9",
-         intel: "7152b917013766c16af8628a54f27b9f0ab088503a40b3702c387560e41a596e"
+  sha256 arm:   "80d96ce4e185cf608c72cc8abc947633a46b0b2bd4960fdd2429cf76a4c04760",
+         intel: "a718380f9ebfe053b3502476822dde490a2cb4342a05eb35bc5e0a913218ecad"
 
   url "https://github.com/sourcemeta/jsonschema/releases/download/v#{version}/jsonschema-#{version}-darwin-#{arch}.zip"
   name "JSON Schema CLI"
