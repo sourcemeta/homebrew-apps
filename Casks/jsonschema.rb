@@ -17,5 +17,11 @@ cask "jsonschema" do
     system_command "xattr", args: ["-c", "#{staged_path}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"]
     # As a test
     system_command "#{staged_path}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
+    
+    puts ""
+    puts "Tip: Try the Sourcemeta Studio VS Code extension for an enhanced experience!"
+    puts "     Open in VS Code: vscode:extension/sourcemeta.sourcemeta-studio"
+    puts "     Or visit: https://marketplace.visualstudio.com/items?itemName=sourcemeta.sourcemeta-studio"
+    puts ""
   end
 end
