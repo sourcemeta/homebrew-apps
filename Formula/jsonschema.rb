@@ -1,5 +1,5 @@
 class Jsonschema < Formula
-  desc "The CLI for working with JSON Schema"
+  desc "CLI for working with JSON Schema"
   homepage "https://github.com/sourcemeta/jsonschema"
   version "14.14.2"
   license "AGPL-3.0-only"
@@ -28,15 +28,33 @@ class Jsonschema < Formula
     end
   end
 
+  # jsonschema was previously distributed as a cask. The conflicts_with stanza
+  # blocks installation if the cask is still present, with a clear error telling
+  # the user to run:
+  #   brew uninstall --cask sourcemeta/apps/jsonschema
+  conflicts_with cask: "sourcemeta/apps/jsonschema", because: "both install a `jsonschema` binary"
+
   def install
     # Homebrew auto-chdirs into the single top-level directory of the zip,
-    # so bin/, share/, etc. are directly accessible here.
+    # so bin/ and share/ are directly accessible here.
     bin.install "bin/jsonschema"
     bash_completion.install "share/bash-completion/completions/jsonschema"
     zsh_completion.install "share/zsh/site-functions/_jsonschema"
   end
 
+  def post_install
+    caskroom = HOMEBREW_CASKROOM/"jsonschema"
+    return unless caskroom.exist?
+
+    opoo <<~EOS
+      A Cask installation of jsonschema was detected at #{caskroom}.
+      The cask has been superseded by this formula. To complete migration, run:
+        brew uninstall --cask sourcemeta/apps/jsonschema
+        brew install --formula sourcemeta/apps/jsonschema
+    EOS
+  end
+
   test do
-    system "#{bin}/jsonschema", "--version"
+    system bin/"jsonschema", "--version"
   end
 end
