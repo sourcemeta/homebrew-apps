@@ -10,7 +10,7 @@ cask "jsonschema" do
   desc "CLI for working with JSON Schema"
   homepage "https://github.com/sourcemeta/jsonschema"
 
-  deprecate! date: "2026-03-11", because: :moved_to_formula
+  deprecate! date: "2026-03-11", because: "it moved to a formula; uninstall with: brew uninstall --cask jsonschema"
 
   binary "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
   bash_completion "jsonschema-#{version}-darwin-#{arch}/share/bash-completion/completions/jsonschema"

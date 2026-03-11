@@ -50,7 +50,7 @@ class Jsonschema < Formula
       A Cask installation of jsonschema was detected at #{caskroom}.
       The cask has been superseded by this formula. To complete migration, run:
         brew uninstall --cask sourcemeta/apps/jsonschema
-        brew install --formula sourcemeta/apps/jsonschema
+        brew install sourcemeta/apps/jsonschema
     EOS
   end
 
