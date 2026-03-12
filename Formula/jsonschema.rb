@@ -28,11 +28,10 @@ class Jsonschema < Formula
     end
   end
 
-  # jsonschema was previously distributed as a cask. The conflicts_with stanza
-  # blocks installation if the cask is still present, with a clear error telling
-  # the user to run:
-  #   brew uninstall --cask sourcemeta/apps/jsonschema
-  conflicts_with cask: "sourcemeta/apps/jsonschema", because: "both install a `jsonschema` binary"
+  # jsonschema was previously distributed as a cask. Note: conflicts_with cask:
+  # is cosmetic metadata for brew audit only — it does not raise an error at
+  # runtime. The post_install block below is the actual runtime warning.
+  conflicts_with cask: "jsonschema", because: "both install a `jsonschema` binary"
 
   def install
     # Homebrew auto-chdirs into the single top-level directory of the zip,
@@ -50,7 +49,6 @@ class Jsonschema < Formula
       A Cask installation of jsonschema was detected at #{caskroom}.
       The cask has been superseded by this formula. To complete migration, run:
         brew uninstall --cask sourcemeta/apps/jsonschema
-        brew install sourcemeta/apps/jsonschema
     EOS
   end
 
