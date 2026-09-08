@@ -13,15 +13,15 @@ cask "jsonschema" do
   binary "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
   bash_completion "jsonschema-#{version}-darwin-#{arch}/share/bash-completion/completions/jsonschema"
   zsh_completion "jsonschema-#{version}-darwin-#{arch}/share/zsh/site-functions/_jsonschema"
-  postflight do
-    system_command "xattr", args: ["-c", "#{staged_path}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"]
-    # As a test
-    system_command "#{staged_path}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
-    
-    puts ""
-    puts "Tip: Try the Sourcemeta Studio VS Code extension for an enhanced experience!"
-    puts "     Open in VS Code: vscode:extension/sourcemeta.sourcemeta-studio"
-    puts "     Or visit: https://marketplace.visualstudio.com/items?itemName=sourcemeta.sourcemeta-studio"
-    puts ""
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-c", "{{staged_path}}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"]
+    run "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema", base: :staged_path, must_succeed: false
   end
+
+  caveats <<~EOS
+    Tip: Try the Sourcemeta Studio VS Code extension for an enhanced experience!
+         Open in VS Code: vscode:extension/sourcemeta.sourcemeta-studio
+         Or visit: https://marketplace.visualstudio.com/items?itemName=sourcemeta.sourcemeta-studio
+  EOS
 end
