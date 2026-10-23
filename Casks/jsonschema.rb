@@ -10,13 +10,17 @@ cask "jsonschema" do
   name "JSON Schema CLI"
   desc "The CLI for working with JSON Schema"
   homepage "https://github.com/sourcemeta/jsonschema"
-  binary "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"
-  bash_completion "jsonschema-#{version}-darwin-#{arch}/share/bash-completion/completions/jsonschema"
-  zsh_completion "jsonschema-#{version}-darwin-#{arch}/share/zsh/site-functions/_jsonschema"
+  # Interpolated outside of `postflight_steps`, as `version` and `arch` inside
+  # that block refer to Homebrew's install steps DSL, which only defines `arch`
+  # since Homebrew 7.0.0
+  staged_directory = "jsonschema-#{version}-darwin-#{arch}"
+  binary "#{staged_directory}/bin/jsonschema"
+  bash_completion "#{staged_directory}/share/bash-completion/completions/jsonschema"
+  zsh_completion "#{staged_directory}/share/zsh/site-functions/_jsonschema"
   postflight_steps do
     run "/usr/bin/xattr",
-        args: ["-c", "{{staged_path}}/jsonschema-#{version}-darwin-#{arch}/bin/jsonschema"]
-    run "jsonschema-#{version}-darwin-#{arch}/bin/jsonschema", base: :staged_path, must_succeed: false
+        args: ["-c", "{{staged_path}}/#{staged_directory}/bin/jsonschema"]
+    run "#{staged_directory}/bin/jsonschema", base: :staged_path
   end
 
   caveats <<~EOS
